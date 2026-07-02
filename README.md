@@ -100,6 +100,7 @@ AI_PROVIDER=mock
 OPENAI_API_KEY=dummy-key-for-local-mock-mode
 OPENAI_MODEL=gpt-4.1-mini
 CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+CORS_ORIGIN_REGEX=https://.*\.vercel\.app
 ```
 
 Frontend:
@@ -200,6 +201,7 @@ AI_PROVIDER=mock
 OPENAI_API_KEY=dummy-key-for-local-mock-mode
 OPENAI_MODEL=gpt-4.1-mini
 CORS_ORIGINS=https://<your-vercel-app>.vercel.app
+CORS_ORIGIN_REGEX=https://.*\.vercel\.app
 ```
 
 For real OpenAI calls later:
@@ -235,13 +237,13 @@ Environment:
 NEXT_PUBLIC_API_URL=https://<your-render-service>.onrender.com
 ```
 
-After Vercel gives you the final URL, return to Render and set:
+The backend allows exact `CORS_ORIGINS` plus Vercel-generated domains matched by:
 
 ```text
-CORS_ORIGINS=https://<your-vercel-app>.vercel.app
+CORS_ORIGIN_REGEX=https://.*\.vercel\.app
 ```
 
-Redeploy the backend after changing CORS.
+That keeps Vercel preview and generated production aliases working without another backend edit.
 
 ## Future Improvements
 

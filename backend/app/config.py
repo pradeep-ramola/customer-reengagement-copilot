@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     openai_model: str = "gpt-4.1-mini"
     cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
+    cors_origin_regex: str | None = r"https://.*\.vercel\.app"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

@@ -14,7 +14,7 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session, selectinload
 
 from app.ai_clients import get_ai_client
-from app.config import cors_origin_list
+from app.config import cors_origin_list, settings
 from app.database import get_db, init_db
 from app.models import Campaign, CampaignResult, Customer, Draft, Purchase
 from app.schemas import (
@@ -74,6 +74,7 @@ app = FastAPI(title="Customer Re-Engagement AI Copilot", version="0.1.0", lifesp
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origin_list(),
+    allow_origin_regex=settings.cors_origin_regex,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
